@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+
+namespace PracticaSimple
+{
+    public class Operaciones
+    {
+        // Método para multiplicar dos enteros
+        public int Multiplicar(int a, int b)
+        {
+            return a * b;
+        }
+
+        // Sobrecarga para multiplicar tres enteros
+        public int Multiplicar(int a, int b, int c)
+        {
+            return a * b * c;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Operaciones op = new Operaciones();
+
+            // Colección para guardar resultados
+            List<int> resultados = new List<int>();
+
+            try
+            {
+                int r1 = op.Multiplicar(2, 3);
+                int r2 = op.Multiplicar(2, 3, 4);
+
+                resultados.Add(r1);
+                resultados.Add(r2);
+
+                Console.WriteLine("Resultados de la multiplicación:");
+                foreach (var resultado in resultados)
+                {
+                    Console.WriteLine(resultado);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ocurrió un error: {ex.Message}");
+            }
+        }
+    }
+}
