@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+
+namespace PracticaSobrecargaErroresColecciones
+{
+    public class Calculadora
+    {
+        // Método para sumar dos enteros
+        public int Sumar(int a, int b)
+        {
+            return a + b;
+        }
+
+        // Sobrecarga para sumar tres enteros
+        public int Sumar(int a, int b, int c)
+        {
+            return a + b + c;
+        }
+
+        // Sobrecarga para sumar dos decimales
+        public decimal Sumar(decimal a, decimal b)
+        {
+            return a + b;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculadora calc = new Calculadora();
+
+            // Colección: Lista de resultados
+            List<decimal> resultados = new List<decimal>();
+
+            try
+            {
+                // Usando sobrecarga de métodos
+                int suma2 = calc.Sumar(5, 10);
+                int suma3 = calc.Sumar(1, 2, 3);
+                decimal sumaDecimal = calc.Sumar(5.5m, 2.3m);
+
+                resultados.Add(suma2);
+                resultados.Add(suma3);
+                resultados.Add(sumaDecimal);
+
+                Console.WriteLine("Resultados de la suma:");
+                foreach (var r in resultados)
+                {
+                    Console.WriteLine(r);
+                }
+
+                // Colección: Diccionario para registrar operaciones
+                Dictionary<string, decimal> operaciones = new Dictionary<string, decimal>
+                {
+                    { "SumaDos", suma2 },
+                    { "SumaTres", suma3 },
+                    { "SumaDecimal", sumaDecimal }
+                };
+
+                Console.WriteLine("\nOperaciones almacenadas en diccionario:");
+                foreach (var op in operaciones)
+                {
+                    Console.WriteLine($"{op.Key}: {op.Value}");
+                }
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine($"Error de formato: {ex.Message}");
+            }
+            catch (OverflowException ex)
+            {
+                Console.WriteLine($"Error de desbordamiento: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error general: {ex.Message}");
+            }
+            finally
+            {
+                Console.WriteLine("\nEjecución finalizada. Gracias.");
+            }
+        }
+    }
+}
